@@ -7,7 +7,7 @@ provider:
   region: us-east-1
 
 functions:
-  severless-application-api:
+  api:
     handler: handler.handler
     events:
       - http:
