@@ -7,5 +7,18 @@ provider:
   region: us-east-1
 
 functions:
-  generateRandomNumber:
-    handler: src/handler.generateRandomNumber 
+  severless-application-api:
+    handler: handler.handler
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+      - http:
+          path: /{proxy+}
+          method: any
+          cors: true
+      - http:
+          path: /
+          method: post
+          cors: true

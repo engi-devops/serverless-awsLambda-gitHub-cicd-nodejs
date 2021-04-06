@@ -1,0 +1,32 @@
+{
+  "name": "serverless-awslambda-github-cicd-nodejs",
+  "version": "1.0.0",
+  "description": "demo application for our own practice",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/singhsantosh-ss/serverless-awsLambda-gitHub-cicd-nodejs.git"
+  },
+  "keywords": [
+    "Nodejs",
+    "Expressjs",
+    "serverless",
+    "awsLambda",
+    "apiGatway"
+  ],
+  "author": "santosh singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/singhsantosh-ss/serverless-awsLambda-gitHub-cicd-nodejs/issues"
+  },
+  "homepage": "https://github.com/singhsantosh-ss/serverless-awsLambda-gitHub-cicd-nodejs#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.3"
+  }
+}
