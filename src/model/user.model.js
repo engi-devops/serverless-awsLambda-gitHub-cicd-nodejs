@@ -3,30 +3,23 @@ const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 10;
 
     const UserItemSchema = new mongoose.Schema({
-        name: {
-            type: String,
-            trim: true,
-            required: [true, "name is required."]
-        },
         email: {
             type: String,
-            trim: true,
-            lowercase: true,
-            required: [true, "E-mail is required."],
-            index: {
-                uniqe : true
-            },
-            minlength: [6, "Email can't be shorter than 6 characters."],
-            maxlength: [64, "Email can't be longer than 64 characters."],
+            unique: true,
         },
         phone_number: {
             type: Number,
-            required: [true, "phone number is required"]
+            // required: [true, "phone number is required"]
         },
         password: {
             type: String,
-            required: [true, "password is required."]
-        }
+            // required: true
+        },
+        login_type: {
+            type: String,
+            default: '',
+            // required: true
+        },
     }, {
         timestamps : true       
     });
