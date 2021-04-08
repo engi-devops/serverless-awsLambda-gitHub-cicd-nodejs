@@ -38,7 +38,6 @@ routes.post('/register', async (req, res) => {
                     } else {
                         var data = user.toObject();
                         delete data.password;
-                        delete data.resetUserPasswordOTP;
                             return res.status(409).json({
                                 success: false,
                                 messeage: "user already exists.",
@@ -91,7 +90,6 @@ routes.post('/register', async (req, res) => {
                     const token = await JwtTokenGenerator.createToken(user._id, user.email, user.login_type);
                     var data = user.toObject();
                     delete data.password;
-                    delete data.resetUserPasswordOTP;
 
                     data.access_token = token;
 
