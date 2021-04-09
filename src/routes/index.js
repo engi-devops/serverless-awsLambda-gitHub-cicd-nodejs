@@ -117,7 +117,7 @@ routes.post('/auth/register', async (req, res) => {
                 errorInfo: err
             });
         }
-});
+}); 
 
 routes.post('/auth/login', async (req, res) => {
     try {
