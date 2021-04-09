@@ -16,7 +16,7 @@ routes.get('/', (req, res) => {
 
 
 
-routes.post('auth/register', async (req, res) => {
+routes.post('/auth/register', async (req, res) => {
     try {
         let equalConditions = {};
         if (req.body.email) {
@@ -119,7 +119,7 @@ routes.post('auth/register', async (req, res) => {
         }
 });
 
-routes.post('auth/login', async (req, res) => {
+routes.post('/auth/login', async (req, res) => {
     try {
             let email = req.body.email;
             let condition = {
