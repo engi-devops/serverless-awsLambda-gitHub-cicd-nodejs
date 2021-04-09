@@ -16,7 +16,7 @@ routes.get('/', (req, res) => {
 
 
 
-routes.post('/register', async (req, res) => {
+routes.post('auth/register', async (req, res) => {
     try {
         let equalConditions = {};
         if (req.body.email) {
@@ -68,8 +68,8 @@ routes.post('/register', async (req, res) => {
 
                             data.access_token = token;
 
-                            return res.status(400).json({
-                                success: false,
+                            return res.status(200).json({
+                                success: true,
                                 messeage: "Login successfully.",
                                 data: helper.removenull(data)
                             });
@@ -119,6 +119,65 @@ routes.post('/register', async (req, res) => {
         }
 });
 
+routes.post('auth/login', async (req, res) => {
+    try {
+            let email = req.body.email;
+            let condition = {
+                email: {
+                    $regex: new RegExp(email.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'),
+                },
+            };
+            userModel.findOne(condition).then(async (user) => {
+                if (user) {
+                    const token = await JwtTokenGenerator.createToken(user._id, user.email, user.login_type);
+                    var data = user.toObject();
+                    delete data.password;
+                    data.access_token = token;
+
+                    if (req.body.login_type != 'normal') {
+                        return res.status(200).json({
+                            success: true,
+                            messeage: "Login successfully.",
+                            data: helper.removenull(data)
+                        });
+                    } else {
+                        user.comparePassword(req.body.password, async (err, match) => {
+                            if (match === true) {
+                                return res.status(200).json({
+                                    success: true,
+                                    messeage: "Login successfully.",
+                                    data: helper.removenull(data)
+                                });
+                            } else {
+                                return res.status(401).json({
+                                    success: false,
+                                    messeage: "Unauthorized access.",
+                                    data: helper.removenull(data)
+                                });
+                            }
+                        });
+                    }
+                } else {
+                    return res.status(404).json({
+                        success: false,
+                        messeage: "User not found.",
+                    });
+                }
+            }).catch((err) => {
+                return res.status(400).json({
+                    success: false,
+                    messeage: "Bad Request.",
+                    errorInfo: err
+                });
+            });
+        } catch (err) {
+            return res.status(400).json({
+                success: false,
+                messeage: "Bad Request.",
+                errorInfo: err
+            });
+        }
+})
 
 module.exports = {
     routes,

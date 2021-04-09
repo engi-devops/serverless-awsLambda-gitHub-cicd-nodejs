@@ -41,6 +41,17 @@ const SALT_ROUNDS = 10;
         })
     })
 
+    UserItemSchema.methods.comparePassword = function (passw, cb) {
+        //console.log("in password match method", passw)
+        //console.log("database password :----", this.password)
+        bcrypt.compare(passw, this.password, function (err, isMatch) {
+            if (err) {
+                return cb(err);
+            }
+            cb(null, isMatch);
+        });
+    };
+    
 const userModel = mongoose.model('user', UserItemSchema);
 
 module.exports = userModel;

@@ -3,7 +3,7 @@ name: Nodejs Serverless Aws Lambda
 on:
   push:
     branches:
-      - main
+      - development
 
 jobs:
   deploy:
