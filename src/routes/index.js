@@ -10,7 +10,7 @@ const routes = express.Router({
 routes.get('/', (req, res) => {
     res.status(200).json({
         success: true,
-        messeage: "Nodejs + serverless + awsLambda api call successfull."
+        message: "Nodejs + serverless + awsLambda api call successfull."
     });
 });
 
@@ -33,14 +33,14 @@ routes.post('/auth/register', async (req, res) => {
                     if (user.login_type != req.body.login_type) {
                         return res.status(404).json({
                             success: false,
-                            messeage: "user not found.",
+                            message: "user not found.",
                         });
                     } else {
                         var data = user.toObject();
                         delete data.password;
                             return res.status(409).json({
                                 success: false,
-                                messeage: "user already exists.",
+                                message: "user already exists.",
                             });
                     }
                 }
@@ -70,7 +70,7 @@ routes.post('/auth/register', async (req, res) => {
 
                             return res.status(200).json({
                                 success: true,
-                                messeage: "Login successfully.",
+                                message: "Login successfully.",
                                 data: helper.removenull(data)
                             });
                         })
@@ -80,7 +80,7 @@ routes.post('/auth/register', async (req, res) => {
                 } else {
                     return res.status(400).json({
                         success: false,
-                        messeage: "Your credentials are unacceptable.",
+                        message: "Your credentials are unacceptable.",
                         errorInfo: err
                     });
                 }
@@ -96,13 +96,13 @@ routes.post('/auth/register', async (req, res) => {
                     if (error) {
                         return res.status(400).json({
                             success: false,
-                            messeage: "Bad Request.",
+                            message: "Bad Request.",
                             errorInfo: err
                         });
                     } else {
                         return res.status(200).json({
                             success: true,
-                            messeage: "Nodejs + serverless + awsLambda user register&login api call successfull.",
+                            message: "Nodejs + serverless + awsLambda user register&login api call successfull.",
                             data: helper.removenull(data)
                         });
                     }
@@ -113,7 +113,7 @@ routes.post('/auth/register', async (req, res) => {
         } catch (err) {
             return res.status(400).json({
                 success: false,
-                messeage: "Bad Request.",
+                message: "Bad Request.",
                 errorInfo: err
             });
         }
@@ -137,7 +137,7 @@ routes.post('/auth/login', async (req, res) => {
                     if (req.body.login_type != 'normal') {
                         return res.status(200).json({
                             success: true,
-                            messeage: "Login successfully.",
+                            message: "Login successfully.",
                             data: helper.removenull(data)
                         });
                     } else {
@@ -145,13 +145,13 @@ routes.post('/auth/login', async (req, res) => {
                             if (match === true) {
                                 return res.status(200).json({
                                     success: true,
-                                    messeage: "Login successfully.",
+                                    message: "Login successfully.",
                                     data: helper.removenull(data)
                                 });
                             } else {
                                 return res.status(401).json({
                                     success: false,
-                                    messeage: "Unauthorized access.",
+                                    message: "Unauthorized access.",
                                     data: helper.removenull(data)
                                 });
                             }
@@ -160,20 +160,20 @@ routes.post('/auth/login', async (req, res) => {
                 } else {
                     return res.status(404).json({
                         success: false,
-                        messeage: "User not found.",
+                        message: "User not found.",
                     });
                 }
             }).catch((err) => {
                 return res.status(400).json({
                     success: false,
-                    messeage: "Bad Request.",
+                    message: "Bad Request.",
                     errorInfo: err
                 });
             });
         } catch (err) {
             return res.status(400).json({
                 success: false,
-                messeage: "Bad Request.",
+                message: "Bad Request.",
                 errorInfo: err
             });
         }
