@@ -36,8 +36,8 @@ routes.post('/auth/register', async (req, res) => {
                             message: "user not found.",
                         });
                     } else {
-                        var data = user.toObject();
-                        delete data.password;
+                        // var data = user.toObject();
+                        // delete data.password;
                             return res.status(409).json({
                                 success: false,
                                 message: "user already exists.",
